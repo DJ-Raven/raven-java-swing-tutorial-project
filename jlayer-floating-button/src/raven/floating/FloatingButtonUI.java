@@ -60,11 +60,11 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
         int y = jc.getHeight() - size - 15;
         shape = new Ellipse2D.Double(x, y, size, size);
         if (mousePressed) {
-            g2.setColor(new Color(19, 78, 99));
+            g2.setColor(new Color(10, 63, 85));
         } else if (mouseHovered) {
-            g2.setColor(new Color(28, 112, 141));
+            g2.setColor(new Color(19, 105, 139));
         } else {
-            g2.setColor(new Color(33, 138, 174));
+            g2.setColor(new Color(23, 129, 170));
         }
         if (imageShadow == null) {
             createImageShadow(size);
@@ -93,9 +93,8 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
                 mousePressed = false;
                 jlayer.repaint(shape.getBounds());
                 if (mouseHovered) {
-                    jlayer.grabFocus();
-                    MainForm mf = jlayer.getView();
-                    mf.actionButton();
+                    MainForm main = jlayer.getView();
+                    main.actionButton();
                 }
             }
         }
