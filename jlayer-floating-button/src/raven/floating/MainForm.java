@@ -1,7 +1,6 @@
 package raven.floating;
 
 import java.awt.Color;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +17,7 @@ public class MainForm extends javax.swing.JPanel {
     }
 
     public void actionButton() {
-        JOptionPane.showMessageDialog(this, "HI");
+       // JOptionPane.showMessageDialog(this, "HI");
         System.out.println("Action Button work");
     }
 

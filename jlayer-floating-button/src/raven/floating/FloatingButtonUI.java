@@ -80,22 +80,22 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
 
     @Override
     protected void processMouseEvent(MouseEvent me, JLayer<? extends MainForm> jlayer) {
-        Point point = SwingUtilities.convertPoint(me.getComponent(), me.getPoint(), jlayer.getView());
+        if (mouseHovered) {
+            me.consume();
+        }
         if (SwingUtilities.isLeftMouseButton(me)) {
             if (me.getID() == MouseEvent.MOUSE_PRESSED) {
-                if (mousePressed == false && shape.contains(point)) {
+                if (mouseHovered) {
                     mousePressed = true;
-                    me.consume();
                     jlayer.repaint(shape.getBounds());
                 }
             } else if (me.getID() == MouseEvent.MOUSE_RELEASED) {
-                if (mousePressed) {
-                    mousePressed = false;
-                    jlayer.repaint(shape.getBounds());
-                    if (mouseHovered) {
-                        MainForm mf = jlayer.getView();
-                        mf.actionButton();
-                    }
+                mousePressed = false;
+                jlayer.repaint(shape.getBounds());
+                if (mouseHovered) {
+                    jlayer.grabFocus();
+                    MainForm mf = jlayer.getView();
+                    mf.actionButton();
                 }
             }
         }
@@ -104,22 +104,13 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
     @Override
     protected void processMouseMotionEvent(MouseEvent me, JLayer<? extends MainForm> jlayer) {
         Point point = SwingUtilities.convertPoint(me.getComponent(), me.getPoint(), jlayer.getView());
+        boolean hover = shape.contains(point);
+        if (mouseHovered != hover) {
+            mouseHovered = hover;
+            jlayer.repaint(shape.getBounds());
+        }
         if (mousePressed) {
             me.consume();
-        }
-        if (shape.contains(point)) {
-            if (mouseHovered == false) {
-                mouseHovered = true;
-                jlayer.repaint(shape.getBounds());
-                if (mousePressed) {
-                    me.consume();
-                }
-            }
-        } else {
-            if (mouseHovered) {
-                mouseHovered = false;
-                jlayer.repaint(shape.getBounds());
-            }
         }
     }
 
@@ -136,7 +127,6 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
     private BufferedImage createShape(int size) {
         BufferedImage img = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = img.createGraphics();
-        g2.setColor(Color.BLACK);
         g2.fill(new Ellipse2D.Double(0, 0, size, size));
         g2.dispose();
         return img;
