@@ -2,6 +2,7 @@ package raven.floating;
 
 import java.awt.AWTEvent;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -107,6 +108,11 @@ public class FloatingButtonUI extends LayerUI<MainForm> {
         if (mouseHovered != hover) {
             mouseHovered = hover;
             jlayer.repaint(shape.getBounds());
+            if (hover) {
+                jlayer.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            } else {
+                jlayer.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+            }
         }
         if (mousePressed) {
             me.consume();
