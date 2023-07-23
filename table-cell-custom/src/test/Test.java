@@ -1,5 +1,9 @@
 package test;
 
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import raven.cell.TableActionCellEditor;
 import raven.cell.TableActionCellRender;
@@ -38,6 +42,13 @@ public class Test extends javax.swing.JFrame {
         };
         table.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
         table.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
+        table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
+            @Override
+            public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+                setHorizontalAlignment(SwingConstants.RIGHT);
+                return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
+            }
+        });
     }
 
     /**
