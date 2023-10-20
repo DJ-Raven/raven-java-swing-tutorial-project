@@ -10,3 +10,5 @@ Project source code for java swing tutorial
 ![2023-02-14_002048](https://user-images.githubusercontent.com/58245926/218533112-7878426a-34f0-4a8b-bb09-7f14d0a0a7e9.png)
 #### Spinner Table Cell Editor
 ![2023-07-19_172427](https://github.com/DJ-Raven/raven-java-swing-tutorial-project/assets/58245926/ecc2e555-9575-4995-9f95-4f4e402376c2)
+#### JTable Cells with Gradient Color
+![2023-10-20_220735](https://github.com/DJ-Raven/raven-java-swing-tutorial-project/assets/58245926/e82fa30c-1a45-48da-ad3b-d672f22c03fd)
