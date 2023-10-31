@@ -49,6 +49,15 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
 
     public void clearSelectedItems() {
         selectedItems.clear();
+        Component editorCom = getEditor().getEditorComponent();
+        if (editorCom instanceof JScrollPane) {
+            JScrollPane scroll = (JScrollPane) editorCom;
+            JPanel panel = (JPanel) scroll.getViewport().getComponent(0);
+            panel.removeAll();
+            revalidate();
+            repaint();
+            comboList.repaint();
+        }
     }
 
     private final List<Object> selectedItems = new ArrayList<>();
