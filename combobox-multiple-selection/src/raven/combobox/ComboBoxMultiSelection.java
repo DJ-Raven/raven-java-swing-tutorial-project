@@ -3,9 +3,11 @@ package raven.combobox;
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.extras.FlatSVGIcon;
 import com.formdev.flatlaf.icons.FlatCheckBoxIcon;
+import com.formdev.flatlaf.ui.FlatComboBoxUI;
 import com.formdev.flatlaf.ui.FlatUIUtils;
 import com.formdev.flatlaf.util.UIScale;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.plaf.basic.ComboPopup;
 import net.miginfocom.swing.MigLayout;
 
 /**
@@ -81,6 +84,7 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
     }
 
     public ComboBoxMultiSelection() {
+        setUI(new ComboBoxMultiUI());
         comboBoxMultiCellEditor = new ComboBoxMultiCellEditor();
         setRenderer(new ComboBoxMultiCellRenderer());
         setEditor(comboBoxMultiCellEditor);
@@ -101,6 +105,27 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
     @Override
     public void setPopupVisible(boolean v) {
 
+    }
+
+    private class ComboBoxMultiUI extends FlatComboBoxUI {
+
+        @Override
+        protected ComboPopup createPopup() {
+            return new MultiComboPopup(comboBox);
+        }
+
+        private class MultiComboPopup extends FlatComboPopup {
+
+            public MultiComboPopup(JComboBox combo) {
+                super(combo);
+            }
+        }
+
+        @Override
+        protected Dimension getDisplaySize() {
+            Dimension size = super.getDefaultSize();
+            return new Dimension(0, size.height);
+        }
     }
 
     private class ComboBoxMultiCellRenderer extends BasicComboBoxRenderer {
@@ -201,7 +226,7 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
             JButton cmd = new JButton(new FlatSVGIcon("raven/combobox/close.svg", 0.6f));
             cmd.putClientProperty(FlatClientProperties.STYLE, ""
                     + "arc:999;"
-                    + "margin:0,0,0,0;"
+                    + "margin:1,1,1,1;"
                     + "background:null;"
                     + "focusWidth:0");
             cmd.addActionListener((e) -> {
