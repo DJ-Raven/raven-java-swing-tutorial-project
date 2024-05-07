@@ -23,9 +23,8 @@ public class QtyCellEditor extends DefaultCellEditor {
     public QtyCellEditor(EventCellInputChange event) {
         super(new JCheckBox());
         this.event = event;
-        input = new JSpinner();
-        SpinnerNumberModel numberModel = (SpinnerNumberModel) input.getModel();
-        numberModel.setMinimum(1);
+        SpinnerNumberModel numberModel = new SpinnerNumberModel(1, 1, Double.MAX_VALUE, 0.1);
+        input = new JSpinner(numberModel);
         JSpinner.NumberEditor editor = (JSpinner.NumberEditor) input.getEditor();
         DefaultFormatter formatter = (DefaultFormatter) editor.getTextField().getFormatter();
         formatter.setCommitsOnValidEdit(true);
@@ -41,7 +40,7 @@ public class QtyCellEditor extends DefaultCellEditor {
         this.table = table;
         this.row = row;
         this.item = (ModelItemSell) table.getValueAt(row, 0);
-        int qty = Integer.parseInt(value.toString());
+        double qty = Double.parseDouble(value.toString());
         input.setValue(qty);
         input.setEnabled(false);
         enable();
@@ -68,7 +67,7 @@ public class QtyCellEditor extends DefaultCellEditor {
     }
 
     private void inputChange() {
-        int qty = Integer.parseInt(input.getValue().toString());
+        double qty = Double.parseDouble(input.getValue().toString());
         if (qty != item.getQty()) {
             DecimalFormat df = new DecimalFormat("#,##0.##");
             item.setQty(qty);

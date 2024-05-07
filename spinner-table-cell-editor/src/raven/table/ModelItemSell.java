@@ -20,11 +20,11 @@ public class ModelItemSell {
         this.productName = productName;
     }
 
-    public int getQty() {
+    public double getQty() {
         return qty;
     }
 
-    public void setQty(int qty) {
+    public void setQty(double qty) {
         this.qty = qty;
     }
 
@@ -44,7 +44,7 @@ public class ModelItemSell {
         this.total = total;
     }
 
-    public ModelItemSell(int productId, String productName, int qty, double price, double total) {
+    public ModelItemSell(int productId, String productName, double qty, double price, double total) {
         this.productId = productId;
         this.productName = productName;
         this.qty = qty;
@@ -57,7 +57,7 @@ public class ModelItemSell {
 
     private int productId;
     private String productName;
-    private int qty;
+    private double qty;
     private double price;
     private double total;
 
