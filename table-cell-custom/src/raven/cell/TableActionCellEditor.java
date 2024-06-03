@@ -20,7 +20,7 @@ public class TableActionCellEditor extends DefaultCellEditor {
 
     @Override
     public Component getTableCellEditorComponent(JTable jtable, Object o, boolean bln, int row, int column) {
-        PanelAction action = new PanelAction();
+        PanelAction action = new PanelAction(event.isRowEditing(row));
         action.initEvent(event, row);
         action.setBackground(jtable.getSelectionBackground());
         return action;

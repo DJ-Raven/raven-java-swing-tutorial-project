@@ -52,19 +52,19 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="4">
-                <Column editable="false" title="ID" type="java.lang.Object">
+                <Column editable="true" title="ID" type="java.lang.Object">
                   <Data value="1"/>
                   <Data value="2"/>
                   <Data value="3"/>
                   <Data value="4"/>
                 </Column>
-                <Column editable="false" title="Name" type="java.lang.Object">
+                <Column editable="true" title="Name" type="java.lang.Object">
                   <Data value="A"/>
                   <Data value="B"/>
                   <Data value="C"/>
                   <Data value="D"/>
                 </Column>
-                <Column editable="false" title="Tel" type="java.lang.Object">
+                <Column editable="true" title="Tel" type="java.lang.Object">
                   <Data value="001"/>
                   <Data value="002"/>
                   <Data value="003"/>
@@ -105,6 +105,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTable(){&#xa;    @Override&#xa;    public boolean isCellEditable(int row, int col) {&#xa;        return editRow.contains(row)||col==3;&#xa;    }&#xa;}"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

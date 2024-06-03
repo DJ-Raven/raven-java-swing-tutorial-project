@@ -1,8 +1,9 @@
 package test;
 
 import java.awt.Component;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import raven.cell.TableActionCellEditor;
@@ -18,11 +19,22 @@ public class Test extends javax.swing.JFrame {
     /**
      * Creates new form Test
      */
+    private Set<Integer> editRow = new HashSet<>();
+
     public Test() {
         initComponents();
         TableActionEvent event = new TableActionEvent() {
             @Override
             public void onEdit(int row) {
+                if (editRow.contains(row)) {
+                    editRow.remove(row);
+                } else {
+                    editRow.add(row);
+                }
+                if(table.isEditing()){
+                    table.getCellEditor().stopCellEditing();
+                }
+                table.repaint();
                 System.out.println("Edit row : " + row);
             }
 
@@ -33,19 +45,26 @@ public class Test extends javax.swing.JFrame {
                 }
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 model.removeRow(row);
+                editRow.remove(row);
             }
 
             @Override
             public void onView(int row) {
                 System.out.println("View row : " + row);
             }
+
+            @Override
+            public boolean isRowEditing(int row) {
+                return editRow.contains(row);
+            }
+
         };
-        table.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender());
+        table.getColumnModel().getColumn(3).setCellRenderer(new TableActionCellRender(event));
         table.getColumnModel().getColumn(3).setCellEditor(new TableActionCellEditor(event));
         table.getColumnModel().getColumn(0).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
-                setHorizontalAlignment(SwingConstants.RIGHT);
+                // setHorizontalAlignment(SwingConstants.RIGHT);
                 return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
             }
         });
@@ -61,7 +80,12 @@ public class Test extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        table = new javax.swing.JTable(){
+            @Override
+            public boolean isCellEditable(int row, int col) {
+                return editRow.contains(row)||col==3;
+            }
+        };
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,15 +99,7 @@ public class Test extends javax.swing.JFrame {
             new String [] {
                 "ID", "Name", "Tel", "Action"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         table.setRowHeight(40);
         table.setSelectionBackground(new java.awt.Color(56, 138, 112));
         jScrollPane1.setViewportView(table);

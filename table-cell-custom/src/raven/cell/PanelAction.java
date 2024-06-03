@@ -9,11 +9,11 @@ import java.awt.event.ActionListener;
  */
 public class PanelAction extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelAction
-     */
-    public PanelAction() {
+    public PanelAction(boolean edit) {
         initComponents();
+        if (edit) {
+            cmdEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/raven/cell/cancel.png")));
+        }
     }
 
     public void initEvent(TableActionEvent event, int row) {

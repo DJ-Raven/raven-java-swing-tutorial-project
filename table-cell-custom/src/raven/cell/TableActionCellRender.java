@@ -11,10 +11,16 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class TableActionCellRender extends DefaultTableCellRenderer {
 
+    private TableActionEvent event;
+
+    public TableActionCellRender(TableActionEvent event) {
+        this.event = event;
+    }
+
     @Override
     public Component getTableCellRendererComponent(JTable jtable, Object o, boolean isSeleted, boolean bln1, int row, int column) {
         Component com = super.getTableCellRendererComponent(jtable, o, isSeleted, bln1, row, column);
-        PanelAction action = new PanelAction();
+        PanelAction action = new PanelAction(event.isRowEditing(row));
         if (isSeleted == false && row % 2 == 0) {
             action.setBackground(Color.WHITE);
         } else {
