@@ -37,6 +37,9 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
     }
 
     public void setSelectedItems(List<Object> selectedItems) {
+        // clear the internal selection to avoid duplicates
+        clearSelectedItems();
+
         List<Object> comboItem = new ArrayList<>();
         int count = getItemCount();
         for (int i = 0; i < count; i++) {
@@ -59,7 +62,9 @@ public class ComboBoxMultiSelection<E> extends JComboBox<E> {
             panel.removeAll();
             revalidate();
             repaint();
-            comboList.repaint();
+            if (comboList != null) {
+                comboList.repaint();
+            }
         }
     }
 
