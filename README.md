@@ -20,3 +20,6 @@ Project source code for java swing tutorial
 
 #### Combobox Multiple Selection
 <img src="https://github.com/DJ-Raven/raven-java-swing-tutorial-project/assets/58245926/6439235b-c6b3-4d9a-8910-19c07434d9b0" alt="combobox multi selection" width="400"/>
+
+#### Custom Modal Dialog Message
+<img src="https://github.com/user-attachments/assets/1536b307-ebbe-4dd1-9572-4e131c112bf2" alt="custom modal message" width="400"/>
