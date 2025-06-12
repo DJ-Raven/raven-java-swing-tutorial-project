@@ -22,7 +22,7 @@ public class TableBadgeCellRenderer extends JLabel implements TableCellRenderer 
     private TableBadgeCellRenderer(JTable table, int fixedWidth) {
         oldCellRenderer = table.getDefaultRenderer(Object.class);
         putClientProperty(FlatClientProperties.STYLE, "" +
-                "border:2,5,2,5;");
+                "border:2,5,2,5; iconTextGap:5");
         this.fixedWidth = fixedWidth;
 
         if( fixedWidth > 0) {
@@ -31,7 +31,6 @@ public class TableBadgeCellRenderer extends JLabel implements TableCellRenderer 
             setVerticalAlignment(CENTER);
             setHorizontalTextPosition(RIGHT);
             setVerticalTextPosition(CENTER);
-            setIconTextGap(UIScale.scale(5));
         }
     }
 
