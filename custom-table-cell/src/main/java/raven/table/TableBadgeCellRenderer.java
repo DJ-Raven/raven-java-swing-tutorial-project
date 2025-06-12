@@ -13,11 +13,26 @@ public class TableBadgeCellRenderer extends JLabel implements TableCellRenderer 
 
     private final TableCellRenderer oldCellRenderer;
     private JComponent component;
+    private final int fixedWidth;
 
     private TableBadgeCellRenderer(JTable table) {
+        this(table, 0);
+    }
+
+    private TableBadgeCellRenderer(JTable table, int fixedWidth) {
         oldCellRenderer = table.getDefaultRenderer(Object.class);
         putClientProperty(FlatClientProperties.STYLE, "" +
                 "border:2,5,2,5;");
+        this.fixedWidth = fixedWidth;
+
+        if( fixedWidth > 0) {
+            // Configure component for better text positioning
+            setHorizontalAlignment(CENTER);
+            setVerticalAlignment(CENTER);
+            setHorizontalTextPosition(RIGHT);
+            setVerticalTextPosition(CENTER);
+            setIconTextGap(UIScale.scale(5));
+        }
     }
 
     @Override
@@ -36,6 +51,15 @@ public class TableBadgeCellRenderer extends JLabel implements TableCellRenderer 
             return badge;
         }
         return com;
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        Dimension size = super.getPreferredSize();
+        if (fixedWidth > 0) {
+            size.width = UIScale.scale(fixedWidth);
+        }
+        return size;
     }
 
     @Override
@@ -77,6 +101,10 @@ public class TableBadgeCellRenderer extends JLabel implements TableCellRenderer 
 
     public static void apply(JTable table, Class<?> clazz) {
         table.setDefaultRenderer(clazz, new TableBadgeCellRenderer(table));
+    }
+
+    public static void apply(JTable table, Class<?> clazz, int fixedWidth) {
+        table.setDefaultRenderer(clazz, new TableBadgeCellRenderer(table, fixedWidth));
     }
 
     public interface Info {
