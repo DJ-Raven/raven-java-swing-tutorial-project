@@ -26,3 +26,6 @@ Project source code for java swing tutorial
 
 #### Custom Table Cell Renderer [view project](./custom-table-cell)
 <img src="https://github.com/user-attachments/assets/b3d68c0f-9dee-4a26-babf-863c167bb4a5" alt="custom table cell" width="400"/>
+
+#### FlatLaf Tutorial [view project](./flatlaf-tutorial)
+<img src="https://github.com/user-attachments/assets/55cc7fe9-1877-48eb-a4f7-624a5884519e" alt="custom table cell" width="400"/>
