@@ -2,7 +2,7 @@ package raven.tutorial;
 
 import com.formdev.flatlaf.intellijthemes.FlatGruvboxDarkHardIJTheme;
 import net.miginfocom.swing.MigLayout;
-import raven.extras.pagination.Pagination;
+import raven.swingpack.JPagination;
 import raven.tutorial.connection.DatabaseConnection;
 import raven.tutorial.data.ModelCustomer;
 import raven.tutorial.data.ServiceCustomer;
@@ -20,7 +20,7 @@ public class Main extends JFrame {
 
     private ServiceCustomer serviceCustomer;
     private JTable table;
-    private Pagination pagination;
+    private JPagination pagination;
     private JLabel lbTotalRecord;
 
     public Main() {
