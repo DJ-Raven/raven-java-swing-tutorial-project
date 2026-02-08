@@ -30,5 +30,8 @@ Project source code for java swing tutorial
 #### FlatLaf Tutorial [view project](./flatlaf-tutorial)
 <img src="https://github.com/user-attachments/assets/55cc7fe9-1877-48eb-a4f7-624a5884519e" alt="custom table cell" width="400"/>
 
+#### FlatLaf Tutorial: Loading Button [view project](./flatlaf-tutorial)
+<img src="https://github.com/user-attachments/assets/3665c43a-9837-4b9e-b478-8cdf7e7f70dc" alt="custom table cell" width="400"/>
+
 #### Pagination with Mysql [view project](./pagination-with-mysql)
 <img src="https://github.com/user-attachments/assets/8c936c8e-5267-4e48-9a09-a8a75b9bce86" alt="custom table cell" width="400"/>
